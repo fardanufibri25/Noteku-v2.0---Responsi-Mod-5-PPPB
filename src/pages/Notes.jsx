@@ -6,7 +6,7 @@ import { NoteCard } from '../components/NoteCard'
 import { useNoteData } from '../hooks/useNoteData'
 
 export function Notes() {
-  const { notes, isLoading, legacyNotes, importLegacyNotes, pendingCount, syncing, sync, online } = useNoteData()
+  const { notes, isLoading, refreshing, legacyNotes, importLegacyNotes, pendingCount, syncing, sync, online } = useNoteData()
   const flash = useLocation().state?.flash
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('Semua')
@@ -39,6 +39,7 @@ export function Notes() {
           <Link className="button button-primary" to="/notes/new"><Plus size={18} />Catatan baru</Link>
         </div>
       </div>
+      {refreshing && <p className="sync-status" role="status">Menyinkronkan catatan…</p>}
       <div className="notes-controls">
         <label className="search-field">
           <Search size={19} aria-hidden="true" />

@@ -5,7 +5,7 @@ import { NoteCard } from '../components/NoteCard'
 import { useNoteData } from '../hooks/useNoteData'
 
 export function Dashboard() {
-  const { notes, isLoading } = useNoteData()
+  const { notes, isLoading, refreshing } = useNoteData()
   const categories = new Set(notes.map((note) => note.category.trim().toLocaleLowerCase())).size
 
   return (
@@ -18,6 +18,8 @@ export function Dashboard() {
         </div>
         <div className="welcome-illustration" aria-hidden="true"><BookOpen size={72} strokeWidth={1.4} /></div>
       </div>
+
+      {refreshing && <p className="sync-status" role="status">Menyinkronkan catatan…</p>}
 
       <div className="stats-grid" aria-label="Ringkasan catatan">
         <article className="stat-card">

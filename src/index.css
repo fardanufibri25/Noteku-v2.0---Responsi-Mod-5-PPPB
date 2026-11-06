@@ -123,6 +123,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 .offline-banner span { color: var(--color-offline-muted); }
 .error-banner { justify-content: space-between; color: var(--color-danger); background: var(--color-danger-soft); }
 .success-banner { color: var(--color-mint-ink); background: var(--color-mint); }
+.sync-status { margin: -4px 0 16px; color: var(--color-muted); font-size: 13px; }
 .text-button { border: 0; color: inherit; background: transparent; font-weight: 700; }
 
 .welcome-panel {

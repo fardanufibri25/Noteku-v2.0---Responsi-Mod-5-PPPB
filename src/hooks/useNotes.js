@@ -9,13 +9,7 @@ import {
   updateLocalNote,
 } from '../services/offlineNotes'
 import { noteService } from '../services/noteService.js'
-
-function messageOf(error, fallback) {
-  return error.response?.data?.message
-    || error.response?.data?.error
-    || error.message
-    || fallback
-}
+import { messageOf } from '../services/apiError.js'
 
 export function useNotes(userId) {
   const [noteState, setNoteState] = useState({ userId: null, notes: [] })
@@ -30,6 +24,7 @@ export function useNotes(userId) {
   const error = errorState.userId === userId ? errorState.message : ''
   const syncError = syncErrorState.userId === userId ? syncErrorState.message : ''
   const syncing = syncingState.userId === userId && syncingState.value
+  const refreshing = syncing && !isLoading
   const pendingCount = pendingState.userId === userId ? pendingState.count : 0
   const legacyNotes = legacyState.userId === userId ? legacyState.notes : []
 
@@ -148,7 +143,7 @@ export function useNotes(userId) {
   const clearSyncError = useCallback(() => setSyncError(''), [setSyncError])
 
   return {
-    notes, isLoading, error, clearError, createNote, updateNote, deleteNote,
+    notes, isLoading, refreshing, error, clearError, createNote, updateNote, deleteNote,
     syncError, clearSyncError, syncing, pendingCount, legacyNotes, importLegacyNotes, sync,
   }
 }

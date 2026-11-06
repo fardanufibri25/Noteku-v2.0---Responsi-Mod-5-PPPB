@@ -158,6 +158,14 @@ export async function syncNotes(userId, api, storage) {
   }
 }
 
+export function purgeCachedNotes(userId, storage) {
+  try {
+    storageOrDefault(storage).removeItem(stateKey(userId))
+  } catch {
+    throw new Error('Cache catatan lokal gagal dihapus. Coba keluar lagi.')
+  }
+}
+
 export function getLegacyNotes(storage) {
   return getNotes(storage)
 }

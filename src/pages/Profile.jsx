@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Download, GraduationCap, LogOut, ShieldCheck, UserRound } from 'lucide-react'
 import { useNoteData } from '../hooks/useNoteData'
+import { purgeCachedNotes } from '../services/offlineNotes'
 import { profile } from '../data/profile'
 
 function downloadBackup(notes) {
@@ -22,6 +23,11 @@ export function Profile() {
 
   async function handleSignOut() {
     try {
+      if (pendingCount > 0) {
+        setSignOutError('Masih ada perubahan yang belum tersinkron. Sinkronkan dulu sebelum keluar.')
+        return
+      }
+      purgeCachedNotes(user.id)
       const { error } = await signOut()
       if (error) setSignOutError(error.message || 'Keluar gagal. Coba lagi saat online.')
     } catch (error) {

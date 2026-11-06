@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/notes",
+      "destination": "/"
+    },
+    {
+      "source": "/notes/(.*)",
+      "destination": "/"
+    },
+    {
+      "source": "/profile",
+      "destination": "/"
+    }
+  ]
+}

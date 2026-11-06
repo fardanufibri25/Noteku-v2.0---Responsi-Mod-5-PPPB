@@ -55,6 +55,12 @@ export function AuthPage() {
             <button className="text-button auth-toggle" type="button" onClick={() => { setRegistering((value) => !value); setError(''); setMessage('') }}>
               {registering ? 'Sudah punya akun? Masuk' : 'Belum punya akun? Daftar'}
             </button>
+            {/* Demo credentials are public on purpose for the course submission; remove after grading. */}
+            {!registering && (
+              <div className="auth-demo">
+                Akun demo: <code>demo@example.com</code> / <code>NoteKuDemo#2026</code>
+              </div>
+            )}
           </>
         )}
       </section>
